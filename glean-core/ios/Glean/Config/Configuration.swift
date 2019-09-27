@@ -15,7 +15,7 @@ public struct Configuration {
     struct Constants {
         static let defaultTelemetryEndpoint = "https://incoming.telemetry.mozilla.org"
         static let defaultUserAgent = "Glean/\(getGleanVersion()) (iOS)"
-        static let defaultLogPings = false
+        static let defaultLogPings = true
     }
 
     /// This init is for internal testing setup only.
@@ -61,7 +61,7 @@ public struct Configuration {
         self.userAgent = Constants.defaultUserAgent
         self.logPings = Constants.defaultLogPings
         self.maxEvents = maxEvents
-        self.pingTag = nil
+        self.pingTag = "lockwise-debug"
         self.channel = channel
     }
 
