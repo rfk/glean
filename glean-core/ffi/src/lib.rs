@@ -29,6 +29,7 @@ mod string_list;
 mod timespan;
 mod timing_distribution;
 mod uuid;
+mod version;
 
 use ffi_string_ext::FallibleToString;
 use from_raw::*;

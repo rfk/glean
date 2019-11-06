@@ -166,6 +166,27 @@ char *glean_experiment_test_get_data(uint64_t glean_handle, FfiStr experiment_id
 
 uint8_t glean_experiment_test_is_active(uint64_t glean_handle, FfiStr experiment_id);
 
+/**
+ * This exists to allow consumers who dynamically load `libglean_ffi.so` to
+ * ensure they are using a compatible version, and avoid potential memory-
+ * safety issues that might arise if they construct bindings that expect
+ * a different ABI.
+ *
+ * It may be possible to achieve this via some other mechanism (such as
+ * versioning within the .so itself) but it's not entirely obvious how that
+ * should work, and this is a nice safety mechanism in the meantime.
+ *
+ * Critically, that means this function must be ABI stable! It needs to take no
+ * arguments, and return either null, or a NUL-terminated C string. Failure to
+ * do this will result in memory unsafety when an old version of a consumer
+ * loads a newer library!
+ *
+ * If we ever need to change that (which seems unlikely, since we could encode
+ * whatever we want in a string if it came to it), we must change the function's
+ * name as well.
+ */
+const char *glean_get_version(void);
+
 uint64_t glean_initialize(const FfiConfiguration *cfg);
 
 uint8_t glean_is_upload_enabled(uint64_t glean_handle);

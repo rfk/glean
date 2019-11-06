@@ -219,6 +219,10 @@ open class GleanInternalAPI internal constructor () {
         return handle != 0L
     }
 
+    fun getHandle(): Long {
+        return handle
+    }
+
     /**
      * Register the pings generated from `pings.yaml` with the Glean SDK.
      *
